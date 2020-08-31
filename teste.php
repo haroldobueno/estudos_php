@@ -1,8 +1,6 @@
 <?php
-
 //iniciar uma sessão
 session_start();
-
 //criar array vazia
 $categoria = [];
 
@@ -23,47 +21,52 @@ if (empty($nome))
 {
     $_SESSION['mensagem-de-erro'] = 'o nome não pode ser vazio';
     header("location: index.php");
-  
-}
+    return;
+  }
 //aqui conta quantos caracteres tem no campo nome, se for menor do que 2 gera erro.
-if(strlen($nome)< 3)
+else if(strlen($nome)< 3)
 {
 // gerando mensagem de erro e adicionado na sessão
     $_SESSION['mensagem-de-erro'] = 'O nome não pode ter menos que 3 caracteres';
     header("location: index.php");
-
+    return;
 }
 //aqui também conta a quantidade de caracteres e se for maior do que 40 gera erro.
-if(strlen($nome) > 40)
+else if(strlen($nome) > 40)
 {
     $_SESSION['mensagem-de-erro'] = 'O nome é muito extenso';
     header("location: index.php");
-
+    return;
 }
 
 //agora vamos validar o campo da idade.
 // verificando se o dados digitado na idade é um número.
-if (empty($idade))
+else if (empty($idade))
 {
-    echo 'A idade não pode ser vazia';
+    $_SESSION['mensagem-de-erro'] = 'A idade não pode ser vazia';
+    header("location: index.php");
     return;
 }
 
 // quando iniciamos uma expressa com ! estamos negando o que vem a seguir
-if (!is_numeric($idade))
+ else if (!is_numeric($idade))
 {
-    echo 'digite um número para idade';
+    $_SESSION['mensagem-de-erro'] = 'Digite um numero para idade';
+    header("location: index.php");
+    return;
 }
 
 //verifcando a quanditade de numeros digitados na idade
-if(strlen($idade) > 3)
+else if(strlen($idade) > 3)
 {
-    echo'A idade não pode ter mais do que 3 caracteres';
-return; 
+    $_SESSION['mensagem-de-erro'] = 'A idade não pode ter mais do que 3 caracteres';
+    header("location: index.php");
+    return;
 }
 
 
 //var_dump imprime na tela o tipo de variavel e quantidade de caracteres
+
 //var_dump($nome);
 //var_dump($idade);
 
@@ -75,7 +78,9 @@ if ($idade >= 3 && $idade <= 12)
         if($categoria[$i]== "Infantil") 
         {
 
-        echo "O ".$nome." Está na categoria infantil";
+        $_SESSION['mensagem-de-sucesso'] = "O ".$nome." Está na categoria infantil";
+        header("location: index.php");
+        return;
         }
     }
 
@@ -87,8 +92,9 @@ else if ($idade >= 12 && $idade <=18)
         if($categoria[$i]== "Adolescente")
         {
 
-        echo "O ".$nome." Está na categoria Adolescente";
-
+            $_SESSION['mensagem-de-sucesso'] = "O ".$nome." Está na categoria Adolescente";
+            header("location: index.php");
+            return;
     }
   }
 }
@@ -99,8 +105,9 @@ else
         if($categoria[$i]== "Adulto")
         {
 
-        echo "O ".$nome." Está na categoria Adulto";
-
+            $_SESSION['mensagem-de-sucesso'] = "O ".$nome." Está na categoria Adulto";
+            header("location: index.php");
+            return;
     }
 
 }

@@ -1,4 +1,5 @@
 <?php
+//iniciando a sessão
 session_start();
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,13 @@ session_start();
 <p>Formulário para inscrição na competição</p>
 <form action="teste.php" method="post">
     <?php
-    //montar ternario com PHP para exibir mensagem de erro  
+    //montar ternario com PHP para exibir mensagem de sucesso ou erro
+    $mensagemDeSucesso = isset($_SESSION['mensagem-de-sucesso']) ? $_SESSION['mensagem-de-sucesso'] : '';
+    if(!empty($mensagemDeSucesso))
+    {
+        echo $mensagemDeSucesso;
+    }
+    
     $mensagemDeErro = isset($_SESSION['mensagem-de-erro']) ? $_SESSION['mensagem-de-erro'] : '';
     if(!empty($mensagemDeErro))
     {
