@@ -1,5 +1,8 @@
 <?php
 
+//iniciar uma sessão
+session_start();
+
 //criar array vazia
 $categoria = [];
 
@@ -18,34 +21,44 @@ $idade = $_POST['idade'];
 //agora vamos validar os dados digitados nos inputs box
 if (empty($nome))
 {
-    echo 'o nome não pode ser vazio';
-    return;
+    $_SESSION['mensagem-de-erro'] = 'o nome não pode ser vazio';
+    header("location: index.php");
+  
 }
 //aqui conta quantos caracteres tem no campo nome, se for menor do que 2 gera erro.
 if(strlen($nome)< 3)
 {
-    echo'O nome deve conter mais do que 2 caracteres';
-    return;
+// gerando mensagem de erro e adicionado na sessão
+    $_SESSION['mensagem-de-erro'] = 'O nome não pode ter menos que 3 caracteres';
+    header("location: index.php");
+
 }
 //aqui também conta a quantidade de caracteres e se for maior do que 40 gera erro.
 if(strlen($nome) > 40)
 {
-    echo'O nome é muito extenso';
-return; 
+    $_SESSION['mensagem-de-erro'] = 'O nome é muito extenso';
+    header("location: index.php");
+
 }
 
 //agora vamos validar o campo da idade.
 // verificando se o dados digitado na idade é um número.
+if (empty($idade))
+{
+    echo 'A idade não pode ser vazia';
+    return;
+}
+
 // quando iniciamos uma expressa com ! estamos negando o que vem a seguir
 if (!is_numeric($idade))
 {
-    echo 'digita um número para idade';
+    echo 'digite um número para idade';
 }
 
 //verifcando a quanditade de numeros digitados na idade
 if(strlen($idade) > 3)
 {
-    echo'A idade não pode ter mais do que 4 caracteres';
+    echo'A idade não pode ter mais do que 3 caracteres';
 return; 
 }
 

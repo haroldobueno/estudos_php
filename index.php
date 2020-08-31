@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +11,15 @@
 <body>
 <p>Formulário para inscrição na competição</p>
 <form action="teste.php" method="post">
+    <?php
+    //montar ternario com PHP para exibir mensagem de erro  
+    $mensagemDeErro = isset($_SESSION['mensagem-de-erro']) ? $_SESSION['mensagem-de-erro'] : '';
+    if(!empty($mensagemDeErro))
+    {
+        echo $mensagemDeErro;
+    }
+    
+    ?>
 <p>Informe seu Nome <input type="text" name="nome"></p>
 <p>Informe sua idade <input type="text" name="idade"></p>
 <p><input type="submit" value="Enviar dados"></p>
