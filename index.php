@@ -1,6 +1,6 @@
 <?php
-//iniciando a sessão
-session_start();
+
+include "servicos/mensagem_sessao.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +14,13 @@ session_start();
 <form action="teste.php" method="post">
     <?php
     //montar ternario com PHP para exibir mensagem de sucesso ou erro
-    $mensagemDeSucesso = isset($_SESSION['mensagem-de-sucesso']) ? $_SESSION['mensagem-de-sucesso'] : '';
+    $mensagemDeSucesso = obterMensagemSucesso();
     if(!empty($mensagemDeSucesso))
     {
         echo $mensagemDeSucesso;
     }
     
-    $mensagemDeErro = isset($_SESSION['mensagem-de-erro']) ? $_SESSION['mensagem-de-erro'] : '';
+    $mensagemDeErro = obterMensagemErro();
     if(!empty($mensagemDeErro))
     {
         echo $mensagemDeErro;
